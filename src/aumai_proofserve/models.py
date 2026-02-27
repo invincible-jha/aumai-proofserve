@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -22,7 +22,7 @@ class ComputationProof(BaseModel):
     computation_hash: str  # SHA-256 hex of the computation log
     chain_hash: str   # SHA-256 hex of input_hash + output_hash + computation_hash
     algorithm: str = "sha256"
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(tz=timezone.utc))
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 

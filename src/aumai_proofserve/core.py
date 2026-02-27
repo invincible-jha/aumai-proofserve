@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 from .models import ComputationProof, VerificationResult
@@ -80,7 +80,7 @@ class ProofGenerator:
             computation_hash=computation_hash,
             chain_hash=chain_hash,
             algorithm=_ALGORITHM,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(tz=timezone.utc),
             metadata=metadata or {},
         )
 
